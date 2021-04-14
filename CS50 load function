@@ -33,30 +33,40 @@ bool check(const char *word)
 bool load(const char *dictionary)
 {
     // TODO
+    // Open file and check if it opens
     FILE *file = fopen(dictionary, "r");
     if(file == NULL)
     {
         return false;
     }
 
+    // Create string for words
     char word[LENGTH + 1];
+
+    // Read each word from file untill end of file
     while(fscanf(file, "%s", word) != EOF)
     {
+        // Create node and check it
         node *tmpnode = malloc(sizeof(node));
         if(tmpnode == NULL)
         {
             return false;
         }
 
+        // copy every word into the node
         strcpy(tmpnode->word, word);
         tmpnode->next = NULL;
 
+        // Use hash function to get index
         int index = hash(word);
 
+        // if head node is empty
         if(table[index] == NULL)
         {
+            // Use index to put word in node
             table[index] = tmpnode;
         }
+        // if head node is not empty insert word at the start
         else
         {
             tmpnode->next = table[index];
