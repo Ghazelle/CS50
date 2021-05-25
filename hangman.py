@@ -2,7 +2,6 @@
 import random
 
 class Lexicon:
-
     def __init__(self, word_length):
         assert word_length > 0 and word_length < 44, "Invalid word length for Lexicon"
 
